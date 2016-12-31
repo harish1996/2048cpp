@@ -1,6 +1,7 @@
 #include<iostream>
 #include<stdio.h>
 #include<string.h>
+/* Displaying the grid of the game in proper format after clearing the screen before each turn */
 void display(int *a,int n)
 {
     int i,j;
@@ -22,6 +23,8 @@ void display(int *a,int n)
         printf("\n\n");
     }
 }
+/*Randomise the appearing new number before each turn in addition to the existing grid and thereby returning the
+new game matrix */
 int* randomfill(int* a,int n)
 {
     int *c=a;
@@ -55,6 +58,8 @@ int* randomfill(int* a,int n)
     }
     return a;
 }
+/*After breaking the grid into column/row vector , the basic joining action is done returning the status of the join
+operation and the grid itself after updation */
 int join(int* a,int n)
 {
     int* c=a;
@@ -77,8 +82,6 @@ int join(int* a,int n)
             for(j=n-disp;j<n;j++)c[j]=0;
         }
         disp=0;
-        //else
-        //{
             for(j=i+1;j<n;j++)
             {
                 if(c[j]!=c[i] && c[j]!=0)break;
@@ -95,9 +98,6 @@ int join(int* a,int n)
                 c[j]=c[j+disp];
             }
             for(j=n-disp;j<n;j++)c[j]=0;
-
-        //}
-
     }
     for(i=0;i<n;i++)
     {
@@ -107,16 +107,14 @@ int join(int* a,int n)
             break;
         }
     }
-    //printf("Join flag : %d\n",flag);
     return flag;
-
 }
+/*Breaking the grid into column vectors for join up process */
 int up(int* a,int n)
 {
     int i,j,flag=0;
     int *col=(int*)malloc(n*sizeof(int));
     int *cold=col;
-    //printf("Executing up");
     for(i=0;i<n;i++)
     {
         for(j=0;j<n;j++)
@@ -134,9 +132,9 @@ int up(int* a,int n)
         }
         cold=col;
     }
-    //printf("%d\n",flag);
     return flag;
 }
+/*Breaking the grid into column vectors for join down process */
 int down(int *a,int n)
 {
     int i,j,flag=0;
@@ -161,6 +159,7 @@ int down(int *a,int n)
     }
     return flag;
 }
+/*Breaking the grid into row vectors for join left process */
 int left(int *a,int n)
 {
     int i,j,flag=0;
@@ -185,6 +184,7 @@ int left(int *a,int n)
     }
     return flag;
 }
+/*Breaking the grid into row vectors for join right process */
 int right(int* a,int n)
 {
     int i,j,flag=0;
@@ -209,6 +209,7 @@ int right(int* a,int n)
     }
     return flag;
 }
+/*Actions taken during each turn . 1) Choice selection 2) Joining 3) New number generation */
 int step(char *choice,int* a,int n)
 {
     int *c=a,flag,*d;
@@ -227,6 +228,7 @@ int step(char *choice,int* a,int n)
     if(d==NULL) return -1;
     else return 1;
 }
+/*The main process */
 int main()
 {
     int n,game=1,imm=0;
