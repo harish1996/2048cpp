@@ -1,0 +1,38 @@
+.button{
+	height: 37px;
+	width: 50px;
+	border-radius:27px;
+	display: inline-block;
+	background-color: #61cce4;
+	border:2px;
+	text-align: center;
+	padding-top: 17px;
+	font-size:10px;
+	font-family: sans-serif;
+	color:red;
+}
+.button#UP{
+	position: relative;
+	left:54px;
+}
+.cells
+{
+	height:31px;
+	width:40px;
+	border-radius:5px;
+	display:inline-block;
+	background-color: gray;
+	border:3px;
+	text-align: center;
+	font-size: 10px;
+	font-family: sans-serif;
+	color:yellow;
+	margin-left: 3px;
+	margin-top: 3px;
+	padding-top: 14px;
+}
+.cells:hover
+{
+	background-color: white;
+	transition-duration: 0.1s;
+}
