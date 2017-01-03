@@ -38,7 +38,6 @@ var randomfill = function(a,n)
 	}
     if(e==0) return null;
     r=Math.floor(e*Math.random())+1;
-    alert(r);
     e=0;
     for(i=0;i<n;i++)
     {
@@ -55,12 +54,13 @@ var randomfill = function(a,n)
         }
         if(e==r) break;
     }
+    console.log(a);
     return a;
 }
 var join = function(a,n)
 {
     var i,j,disp=0,flag=0;
-    var d=a;
+    var d=a.slice();
     for(i=0;i<n;i++)
     {
         if(a[i]==0)
@@ -73,18 +73,21 @@ var join = function(a,n)
             }
             for(j=i;j<n-disp;j++)
             {
-                a[j]=a[j-disp];
+                a[j]=a[j+disp];
             }
             for(j=n-disp;j<n;j++)
             a[j]=0;
         }
+        //console.log(a);
+        //alert(a);
+        //alert(disp);
         disp=0;
         for(j=i+1;j<n;j++)
         {
             if(a[j]!=a[i] && a[j]!=0)break;
             else if(a[j]==a[i])
             {
-                a[i]=a[j]+a[i];
+                a[i]=parseInt(a[j])+parseInt(a[i]);
                 a[j]=0;
                 break;
             }
@@ -96,6 +99,7 @@ var join = function(a,n)
         }
         for(j=n-disp;j<n;j++)a[j]=0;
     }
+console.log(d);
     for(i=0;i<n;i++)
     {
         if(a[i]!=d[i])
@@ -104,6 +108,7 @@ var join = function(a,n)
             break;
         }
     }
+    console.log(flag);
     return [a,flag];
 }
 var up=function(a,n)
@@ -116,6 +121,7 @@ var up=function(a,n)
            cold[j]=a[(j*n)+i];
         }
         x=join(cold,n);
+        //console.log(x[0]);
         if(x[1]==1) flag=1;
         cold=x[0];
         for(j=0;j<n;j++)
@@ -123,6 +129,7 @@ var up=function(a,n)
             a[(j*n)+i]=cold[j];
         }
     }
+    //console.log(a);
     return [a,flag];
 }
 var down=function(a,n)
@@ -142,9 +149,10 @@ var down=function(a,n)
             a[(j*n)+i]=cold[n-1-j];
         }
     }
+    //console.log(a);
     return [a,flag];
 }
-var right=function(a,n)
+var left=function(a,n)
 {
     var i,j,flag=0,cold=new Array(n);
     for(i=0;i<n;i++)
@@ -161,9 +169,10 @@ var right=function(a,n)
             a[(i*n)+j]=cold[j];
         }
     }
+    //console.log(a);
     return [a,flag];
 }
-var left=function(a,n)
+var right=function(a,n)
 {
     var i,j,flag=0,cold=new Array(n);
     for(i=0;i<n;i++)
@@ -180,6 +189,7 @@ var left=function(a,n)
             a[(i*n)+j]=cold[n-1-j];
         }
     }
+    //console.log(a);
     return [a,flag];
 }
 /*var step = function(choice,a,n)
@@ -249,7 +259,6 @@ function display(a,n)
 function control(choice)
 {
     var a,c=1,n,i=0,flag,x,y;
-    alert("Inside control");
     while(c!=null)
     {
         c=document.getElementById("cell"+i);
@@ -257,19 +266,25 @@ function control(choice)
     }
     n=Math.sqrt(i-1);
     a=getgrid(n);
-
+    y=new Array(n*n);
     switch(choice)
     {
         case 1:x=up(a,n);
+                break;
         case 2:x=left(a,n);
+            break; 
         case 3:x=down(a,n);
+            break;
         case 4:x=right(a,n);
-    } 
+            break;
+    }
+    //console.log(x[0]);
     a=x[0];
     flag=x[1];
-    if(flag==1) y=randomfill(a,n);
-    if(y!=null)
-    display(y,n);
+    //alert(a);
+    if(flag==1) a=randomfill(a,n);
+    if(a!=null)
+    display(a,n);
 }
 function initialise()
 {
