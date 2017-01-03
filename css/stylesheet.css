@@ -15,6 +15,10 @@
 	position: relative;
 	left:54px;
 }
+.button:active
+{
+	background-color: #000000;
+}
 .cells
 {
 	height:31px;

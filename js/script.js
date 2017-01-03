@@ -1,5 +1,5 @@
 
-function display(a,n)
+/*function display(a,n)
 {
     var i,j;
     var c;
@@ -23,7 +23,7 @@ function display(a,n)
         }    
         alias.innerHTML+="\n\n";
     }
-}
+}*/
 var randomfill = function(a,n)
 {
 	var c;
@@ -36,8 +36,9 @@ var randomfill = function(a,n)
 			if(c==0)e++;
 		}
 	}
-    if(e==0) return NULL;
-    r=e*Math.rand()+1;
+    if(e==0) return null;
+    r=Math.floor(e*Math.random())+1;
+    alert(r);
     e=0;
     for(i=0;i<n;i++)
     {
@@ -47,8 +48,8 @@ var randomfill = function(a,n)
             if(c==0) e++;
             if(e==r)
             {
-                if(Math.floor(rand()*2)) c=2;
-                else c=4;
+                if(Math.floor(Math.random()*2)==1) a[(i*n)+j]=2;
+                else a[(i*n)+j]=4;
                 break;
             }
         }
@@ -58,122 +59,130 @@ var randomfill = function(a,n)
 }
 var join = function(a,n)
 {
-    var c,d,i,j,disp=0,flag=0;
-    for(i=0;i<n;i++) d[i]=c[i];
+    var i,j,disp=0,flag=0;
+    var d=a;
     for(i=0;i<n;i++)
     {
-        if(c[i]==0)
+        if(a[i]==0)
         {
             disp=1;
             for(j=i+1;j<n;j++)
             {
-                if(c[j]!=0) break;
+                if(a[j]!=0) break;
                 else disp++;
             }
             for(j=i;j<n-disp;j++)
             {
-                c[j]=c[j-disp];
+                a[j]=a[j-disp];
             }
             for(j=n-disp;j<n;j++)
-            c[j]=0;
+            a[j]=0;
         }
         disp=0;
         for(j=i+1;j<n;j++)
         {
-            if(c[j]!=c[i] && c[j]!=0)break;
-            else if(c[j]==c[i])
+            if(a[j]!=a[i] && a[j]!=0)break;
+            else if(a[j]==a[i])
             {
-                c[i]=c[j]+c[i];
-                c[j]=0;
+                a[i]=a[j]+a[i];
+                a[j]=0;
                 break;
             }
-            else if(c[j]==0) disp++;
+            else if(a[j]==0) disp++;
         }
         for(j=i+1;j<n-disp;j++)
         {
-            c[j]=c[j+disp];
+            a[j]=a[j+disp];
         }
-        for(j=n-disp;j<n;j++)c[j]=0;
+        for(j=n-disp;j<n;j++)a[j]=0;
     }
     for(i=0;i<n;i++)
     {
-        if(c[i]!=d[i])
+        if(a[i]!=d[i])
         {
             flag=1;
             break;
         }
     }
-    return flag;
+    return [a,flag];
 }
 var up=function(a,n)
 {
-    var i,j,flag=0,col,cold;
+    var i,j,flag=0,cold=new Array(n),x;
     for(i=0;i<n;i++)
     {
         for(j=0;j<n;j++)
         {
            cold[j]=a[(j*n)+i];
         }
-        if(join(cold,n)==1) flag=1;
+        x=join(cold,n);
+        if(x[1]==1) flag=1;
+        cold=x[0];
         for(j=0;j<n;j++)
         {
             a[(j*n)+i]=cold[j];
         }
     }
-    return flag;
+    return [a,flag];
 }
 var down=function(a,n)
 {
-    var i,j,flag=0,col,cold;
+    var i,j,flag=0,cold=new Array(n);
     for(i=0;i<n;i++)
     {
         for(j=n-1;j>=0;j--)
         {
            cold[n-1-j]=a[(j*n)+i];
         }
-        if(join(cold,n)==1) flag=1;
+        x=join(cold,n);
+        if(x[1]==1) flag=1;
+        cold=x[0];
         for(j=n-1;j>=0;j--)
         {
             a[(j*n)+i]=cold[n-1-j];
         }
     }
-    return flag;
+    return [a,flag];
 }
 var right=function(a,n)
 {
-    var i,j,flag=0,col,cold;
+    var i,j,flag=0,cold=new Array(n);
     for(i=0;i<n;i++)
     {
         for(j=0;j<n;j++)
         {
            cold[j]=a[(i*n)+j];
         }
-        if(join(cold,n)==1) flag=1;
+         x=join(cold,n);
+        if(x[1]==1) flag=1;
+        cold=x[0];
         for(j=0;j<n;j++)
         {
             a[(i*n)+j]=cold[j];
         }
     }
-    return flag;
+    return [a,flag];
 }
 var left=function(a,n)
 {
-    var i,j,flag=0,col,cold;
+    var i,j,flag=0,cold=new Array(n);
     for(i=0;i<n;i++)
     {
         for(j=n-1;j>=0;j--)
         {
            cold[n-1-j]=a[(i*n)+j];
         }
-        if(join(cold,n)==1) flag=1;
+         x=join(cold,n);
+        if(x[1]==1) flag=1;
+        cold=x[0];
         for(j=n-1;j>=0;j--)
         {
             a[(i*n)+j]=cold[n-1-j];
         }
     }
-    return flag;
+    return [a,flag];
 }
-var step = function(choice,a,n)
+/*var step = function(choice,a,n)
 {
     var c,flag,d;
     switch(choice)
@@ -188,8 +197,8 @@ var step = function(choice,a,n)
     if(flag==1)d=randomfill(c,n);
     if(d==NULL) return -1;
     else return 1;
-}
-function func()
+}*/
+/*function func()
 {
     var a,n,game=1,imm=0,choice;
     n=prompt("Enter Grid size");
@@ -209,10 +218,58 @@ function func()
             display(a,n);
         }
     }
+}*/
+var getgrid = function(n)
+{
+    var c=new Array(n*n),a;
+    for(var i=0;i<n;i++)
+    {
+        for(var j=0;j<n;j++)
+        {
+            a=document.getElementById("cell"+((i*n)+j)).innerHTML;
+            if(a==" ") c[((i*n)+j)]=0;
+            else c[(i*n)+j]=a;
+        }
+    }
+    return c;
+}
+function display(a,n)
+{
+    for(var i=0;i<n;i++)
+    {
+        for(var j=0;j<n;j++)
+        {
+            var x=document.getElementById("cell"+((i*n)+j));
+            if(a[(i*n)+j]==0) x.innerHTML=" ";
+            else x.innerHTML=a[(i*n)+j];
+        }
+    }
+
 }
 function control(choice)
 {
+    var a,c=1,n,i=0,flag,x,y;
+    alert("Inside control");
+    while(c!=null)
+    {
+        c=document.getElementById("cell"+i);
+        i++;
+    }
+    n=Math.sqrt(i-1);
+    a=getgrid(n);
 
+    switch(choice)
+    {
+        case 1:x=up(a,n);
+        case 2:x=left(a,n);
+        case 3:x=down(a,n);
+        case 4:x=right(a,n);
+    } 
+    a=x[0];
+    flag=x[1];
+    if(flag==1) y=randomfill(a,n);
+    if(y!=null)
+    display(y,n);
 }
 function initialise()
 {
@@ -224,11 +281,21 @@ function initialise()
         for(var j=0;j<n;j++)
         {
             var z=(i*n)+j,str;
-            grid.innerHTML+="<div class=\"row"+i+" cells\" id=\"cell"+z+"\"> "+(z+1)+"</div>"; 
+            grid.innerHTML+="<div class=\"row"+i+" cells\" id=\"cell"+z+"\"> "+"</div>"; 
             var select = document.getElementById("cell"+z);
-            str="background-color:rgb(128,128,"+Math.floor(z*x)+");";//height:"+Math.floor(z*y)+"px;width:"+Math.floor(z*y)+"px;";
+            str="background-color:rgb(0,0,"+Math.floor(z*x)+");";//height:"+Math.floor(z*y)+"px;width:"+Math.floor(z*y)+"px;";
             select.style=str;
+            select.innerHTML=" ";
         }
         grid.innerHTML+="<br>";
+    }
+    var a=getgrid(n);
+    a=randomfill(a,n);
+    for(var i=0;i<n;i++)
+    {
+        for(var j=0;j<n;j++)
+        {
+            document.getElementById("cell"+((i*n)+j)).innerHTML=a[(i*n)+j];
+        }
     }
 }
