@@ -1,3 +1,9 @@
+html, body 
+{ 
+	margin: 0; 
+    height: 100%; 
+    overflow: hidden
+}
 .button{
 	height: 37px;
 	width: 50px;
@@ -28,12 +34,12 @@
 	background-color: gray;
 	border:3px;
 	text-align: center;
-	font-size: 10px;
+	font-size: 20px;
 	font-family: sans-serif;
-	color:yellow;
+	color:red;
 	margin-left: 3px;
 	margin-top: 3px;
-	padding-top: 14px;
+	padding-top: 10px;
 }
 .cells:hover
 {

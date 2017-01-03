@@ -1,29 +1,3 @@
-
-/*function display(a,n)
-{
-    var i,j;
-    var c;
-    document.getElementById("ctrl").innerHTML="<pre>"+"Controls\n\n   W\n\nA  S  D\n\n Q to Quit\n\n"+"</pre>";
-    var alias = document.getElementById("main");
-	alias.innerHTML="";    
-	for (i = 0; i < n; i++)
-    {
-        alias.innerHTML+="&#9&#9&#9";
-        for (j = 0; j<n; j++) 
-        {
-            c=a[(i*n)+j];
-            if(c!=0)
-            {
-                alias.innerHTML+= c;
-
-            }
-            else
-                alias.innerHTML+= "";
-            alias.innerHTML+=" |&#9";
-        }    
-        alias.innerHTML+="\n\n";
-    }
-}*/
 var randomfill = function(a,n)
 {
 	var c;
@@ -54,7 +28,6 @@ var randomfill = function(a,n)
         }
         if(e==r) break;
     }
-    console.log(a);
     return a;
 }
 var join = function(a,n)
@@ -99,7 +72,6 @@ var join = function(a,n)
         }
         for(j=n-disp;j<n;j++)a[j]=0;
     }
-console.log(d);
     for(i=0;i<n;i++)
     {
         if(a[i]!=d[i])
@@ -108,7 +80,6 @@ console.log(d);
             break;
         }
     }
-    console.log(flag);
     return [a,flag];
 }
 var up=function(a,n)
@@ -192,43 +163,6 @@ var right=function(a,n)
     //console.log(a);
     return [a,flag];
 }
-/*var step = function(choice,a,n)
-{
-    var c,flag,d;
-    switch(choice)
-    {
-        case 1: flag=up(a,n);
-        case 2: flag=left(a,n);
-        case 3: flag=down(a,n);
-        case 4: flag=right(a,n);
-        case 5: return -1;
-        default : { alert("Invalid Option !"); return 0;}
-    }
-    if(flag==1)d=randomfill(c,n);
-    if(d==NULL) return -1;
-    else return 1;
-}*/
-/*function func()
-{
-    var a,n,game=1,imm=0,choice;
-    n=prompt("Enter Grid size");
-    a=randomfill(a,n);
-    while(game==1)
-    {
-        display(a,n);
-        do
-        {
-            choice=getalert();
-            imm=step(choice,a,n);
-        }while(imm==0)
-        if(imm=1)
-        {
-            game=0;
-            alert("Game Over!!");
-            display(a,n);
-        }
-    }
-}*/
 var getgrid = function(n)
 {
     var c=new Array(n*n),a;
@@ -250,8 +184,17 @@ function display(a,n)
         for(var j=0;j<n;j++)
         {
             var x=document.getElementById("cell"+((i*n)+j));
-            if(a[(i*n)+j]==0) x.innerHTML=" ";
-            else x.innerHTML=a[(i*n)+j];
+            if(a[(i*n)+j]==0) 
+            {
+                x.innerHTML=" ";
+                x.style="background-color:rgb(128,128,0)";
+            }
+            else 
+            {
+                x.innerHTML=a[(i*n)+j];
+                x.style="background-color:rgb(128,128,"+(Math.floor(Math.log2(a[(i*n)+j])*256/12))+");";
+            }
+
         }
     }
 
@@ -310,7 +253,11 @@ function initialise()
     {
         for(var j=0;j<n;j++)
         {
+            var x=a[(i*n)+j];
+            if(x!=0)
             document.getElementById("cell"+((i*n)+j)).innerHTML=a[(i*n)+j];
+            else
+            document.getElementById("cell"+((i*n)+j)).innerHTML=" ";
         }
     }
 }
