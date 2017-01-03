@@ -36,3 +36,12 @@
 	background-color: white;
 	transition-duration: 0.1s;
 }
+.divs{
+	position: relative;
+	left:40%;
+}
+.buttons
+{
+	position: relative;
+	left:60%;
+}
