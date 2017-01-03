@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>2048</title>
+	<script src="js/script.js"></script>
+	<script>
+	document.onkeydown=function (e)
+	{
+		e=e||window.event;
+		if(e.keyCode=='38') control(1);
+		else if(e.keyCode=='40') control(3);
+		else if(e.keyCode=='37') control(2);
+		else if(e.keyCode=='39') control(4);
+		else alert("Wrong keypress");
+
+	}
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+
+</head>
+<body onload="initialise()">
+<h1> 2048 - The Game </h1>
+<div id="ctrl"></div>
+<pre><div class="divs" id="main"></div></pre>
+<pre> &#9</pre><div class="buttons"><div class="button" id="UP" onclick="control(1)"> UP </div><br><br>
+<div class="button" onclick="control(2)"> LEFT </div>
+<div class="button" onclick="control(3)"> DOWN </div>
+<div class="button" onclick="control(4)"> RIGHT </div></div>
+</body>
+</html>
