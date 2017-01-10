@@ -71,3 +71,7 @@ h1 {
 	position: relative;
 	left:60%;
 }
+div#game
+{
+display:iblock;
+}
