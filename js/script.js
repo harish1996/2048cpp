@@ -226,11 +226,11 @@ function control(choice)
     flag=x[1];
     //alert(a);
     if(flag==1) a=randomfill(a,n);
-    else 
+    /*else 
     {
     	if((up(a,n)[1]==0)&&(right(a,n)[1]==0))
     	document.getElementById("game").innerHTML="Game Over ! Refresh Browser to start a new game ! ";
-    }
+    }*/
     if(a!=null)
     display(a,n);
 }
